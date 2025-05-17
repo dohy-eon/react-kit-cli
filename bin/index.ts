@@ -6,6 +6,94 @@ import fs from "fs-extra";
 
 const program = new Command();
 
+// Tailwind CSS 설정 추가 함수
+async function addTailwindConfig(projectPath: string) {
+	const tailwindConfig = `/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}`;
+
+	const postcssConfig = `export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}`;
+
+	await fs.writeFile(path.join(projectPath, "tailwind.config.js"), tailwindConfig);
+	await fs.writeFile(path.join(projectPath, "postcss.config.js"), postcssConfig);
+
+	// package.json에 의존성 추가
+	const packageJsonPath = path.join(projectPath, "package.json");
+	const packageJson = await fs.readJson(packageJsonPath);
+	
+	packageJson.devDependencies = {
+		...packageJson.devDependencies,
+		"tailwindcss": "^3.4.1",
+		"postcss": "^8.4.35",
+		"autoprefixer": "^10.4.17"
+	};
+
+	await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
+
+	// src/index.css에 Tailwind 지시어 추가
+	const cssPath = path.join(projectPath, "src/index.css");
+	await fs.writeFile(cssPath, `@tailwind base;
+@tailwind components;
+@tailwind utilities;`);
+}
+
+// Vitest 설정 추가 함수
+async function addVitestConfig(projectPath: string) {
+	const vitestConfig = `/// <reference types="vitest" />
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.ts'],
+  },
+})`;
+
+	await fs.writeFile(path.join(projectPath, "vitest.config.ts"), vitestConfig);
+
+	// package.json에 의존성과 스크립트 추가
+	const packageJsonPath = path.join(projectPath, "package.json");
+	const packageJson = await fs.readJson(packageJsonPath);
+	
+	packageJson.devDependencies = {
+		...packageJson.devDependencies,
+		"vitest": "^1.2.2",
+		"@testing-library/react": "^14.2.1",
+		"@testing-library/jest-dom": "^6.4.2",
+		"jsdom": "^24.0.0"
+	};
+
+	packageJson.scripts = {
+		...packageJson.scripts,
+		"test": "vitest",
+		"test:ui": "vitest --ui",
+		"coverage": "vitest run --coverage"
+	};
+
+	await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
+
+	// 테스트 설정 파일 생성
+	const testSetupPath = path.join(projectPath, "src/test/setup.ts");
+	await fs.ensureDir(path.dirname(testSetupPath));
+	await fs.writeFile(testSetupPath, `import '@testing-library/jest-dom';`);
+}
+
 program
 	.name("react-kit")
 	.description("리액트 프로젝트 세팅 도구")
@@ -43,12 +131,12 @@ program
 			// 4. 옵션에 따른 추가 설정
 			if (options.withTailwind) {
 				console.log(chalk.blue("Tailwind CSS 설정을 추가합니다..."));
-				// TODO: Tailwind 설정 추가
+				await addTailwindConfig(projectPath);
 			}
 
 			if (options.withVitest) {
 				console.log(chalk.blue("Vitest 설정을 추가합니다..."));
-				// TODO: Vitest 설정 추가
+				await addVitestConfig(projectPath);
 			}
 
 			console.log(chalk.green("\n프로젝트 생성이 완료되었습니다!"));
