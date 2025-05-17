@@ -6,17 +6,24 @@
   },
   "scripts": {
     "dev": "node dist/bin/index.js",
-    "build": "tsc"
+    "build": "tsc --project tsconfig.json && npm run copy-templates",
+    "copy-templates": "xcopy /E /I /Y /H templates dist\\templates"
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
-    "fs-extra": "^11.3.0"
+    "fs-extra": "^11.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^22.15.18",
+    "@types/react": "^18.3.21",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vite": "^5.0.0"
   }
 }

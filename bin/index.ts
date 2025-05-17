@@ -125,8 +125,17 @@ program
 			await fs.mkdir(projectPath);
 
 			// 3. 템플릿 복사
-			const templatePath = path.join(__dirname, "../templates/base");
-			await fs.copy(templatePath, projectPath);
+			const templatePath = path.resolve(__dirname, "../templates/base");
+			console.log("[DEBUG] 템플릿 경로:", templatePath);
+			console.log("[DEBUG] package.json 존재 여부:", fs.existsSync(path.join(templatePath, "package.json")));
+
+			// package.json 복사
+			fs.copyFileSync(path.join(templatePath, "package.json"), path.join(projectPath, "package.json"));
+
+			// 나머지 파일 복사
+			fs.copySync(templatePath, projectPath, { filter: (src) => !src.endsWith('package.json') });
+
+			console.log("[DEBUG] 복사 후 package.json 존재 여부:", fs.existsSync(path.join(projectPath, "package.json")));
 
 			// 4. 옵션에 따른 추가 설정
 			if (options.withTailwind) {
