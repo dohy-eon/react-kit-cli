@@ -2,3 +2,5 @@ node_modules
 dist/
 .eslintcache
 .prettiercache
+test-project-6/
+test-cli/
