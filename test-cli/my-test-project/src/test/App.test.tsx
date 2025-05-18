@@ -13,4 +13,4 @@ describe('App 컴포넌트', () => {
     const button = screen.getByText('카운트: 0');
     expect(button).toBeInTheDocument();
   });
-}); 
+});
