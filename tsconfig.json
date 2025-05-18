@@ -7,8 +7,9 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx"
   },
-  "include": ["bin/**/*"],
-  "exclude": ["node_modules", "dist", "templates"]
+  "include": ["bin/**/*", "src/**/*"],
+  "exclude": ["node_modules", "dist", "templates", "**/*.test.ts", "**/*.spec.ts"]
 }
