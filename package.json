@@ -7,7 +7,10 @@
   "scripts": {
     "dev": "node dist/bin/index.js",
     "build": "tsc --project tsconfig.json && npm run copy-templates",
-    "copy-templates": "xcopy /E /I /Y /H templates dist\\templates"
+    "copy-templates": "xcopy /E /I /Y /H templates dist\\templates",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
@@ -21,7 +24,15 @@
     "@types/node": "^22.15.18",
     "@types/react": "^18.3.21",
     "@types/react-dom": "^18.3.7",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
     "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "vite": "^5.0.0"
