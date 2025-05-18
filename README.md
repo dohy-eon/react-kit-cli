@@ -1,8 +1,10 @@
 # React Kit CLI
 
-React Kit CLI는 React 프로젝트를 빠르게 설정하고 시작하도록 도와주는 CLI 도구입니다. TypeScript, ESLint, Prettier, Tailwind CSS, Vitest 등의 개발 도구들을 자동으로 설정해주어 개발 환경 구축 시간을 단축시키는데 목표를 두었습니다.
+React Kit CLI는 React 프로젝트를 빠르게 설정하고 시작하도록 도와주는 CLI 도구입니다.  
 
-## 해결하고자 하는 문제
+TypeScript, ESLint, Prettier, Tailwind CSS, Vitest 등의 개발 도구들을 자동으로 설정해주어 개발 환경 구축 시간을 단축시키는데 목표를 두었습니다.
+
+## 🛠️ 해결하고자 하는 문제
 
 React 프로젝트를 시작할 때마다 반복되는 설정 작업들:
 - TypeScript 설정
@@ -13,7 +15,7 @@ React 프로젝트를 시작할 때마다 반복되는 설정 작업들:
 
 이러한 반복적인 설정 작업을 자동화하여 일종의 보일러플레이트를 제공하고자 했습니다.
 
-## 주요 기능
+## ✨ 주요 기능
 
 - **기본 React + TypeScript 프로젝트 생성**
   - Vite 기반의 빠른 개발 환경
@@ -30,7 +32,7 @@ React 프로젝트를 시작할 때마다 반복되는 설정 작업들:
   - React Testing Library 설정
   - 테스트 스크립트 자동 추가
 
-## 시작하기
+## ⚡ 시작하기
 
 ### 설치
 
@@ -85,7 +87,7 @@ react-kit-cli/
 └── dist/            # 빌드 결과물
 ```
 
-## 라이브러리 레퍼런스
+## 📚 라이브러리 레퍼런스
 
 ### Commander
 - [공식 문서](https://github.com/tj/commander.js/)
