@@ -12,6 +12,7 @@ React 프로젝트를 시작할 때마다 반복되는 설정 작업들:
 - Tailwind CSS 설정
 - 테스트 환경 구축
 - 빌드 도구 설정
+- 상태관리 설정
 
 이러한 반복적인 설정 작업을 자동화하여 일종의 보일러플레이트를 제공하고자 했습니다.
 
@@ -31,6 +32,12 @@ React 프로젝트를 시작할 때마다 반복되는 설정 작업들:
   - `--with-vitest` 옵션으로 Vitest 설정 추가
   - React Testing Library 설정
   - 테스트 스크립트 자동 추가
+
+- **상태관리 통합**
+  - `--with-redux` 옵션으로 Redux 설정 추가
+  - `--with-recoil` 옵션으로 Recoil 설정 추가
+  - 기본 상태관리 템플릿 제공
+  - TypeScript 타입 지원
 
 ## ⚡ 시작하기
 
@@ -57,9 +64,19 @@ Vitest 포함:
 react-kit init my-project --with-vitest
 ```
 
+Redux 포함:
+```bash
+react-kit init my-project --with-redux
+```
+
+Recoil 포함:
+```bash
+react-kit init my-project --with-recoil
+```
+
 모든 기능 포함:
 ```bash
-react-kit init my-project --with-tailwind --with-vitest
+react-kit init my-project --with-tailwind --with-vitest --with-redux
 ```
 
 ### 린트 및 포맷팅
@@ -84,6 +101,9 @@ react-kit-cli/
 │   ├── types/        # 타입 정의
 │   └── utils/        # 유틸리티 함수
 ├── templates/        # 프로젝트 템플릿
+│   ├── base/         # 기본 템플릿
+│   ├── redux/        # Redux 템플릿
+│   └── recoil/       # Recoil 템플릿
 └── dist/            # 빌드 결과물
 ```
 
@@ -106,6 +126,15 @@ react-kit-cli/
 - [공식 문서](https://vitest.dev/)
 - 테스트 환경설정 부분에서 사용했습니다. 
 
+### Redux
+- [공식 문서](https://redux.js.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- 상태관리 설정 및 템플릿 생성에 사용했습니다.
+
+### Recoil
+- [공식 문서](https://recoiljs.org/)
+- 상태관리 설정 및 템플릿 생성에 사용했습니다.
+
 ### TypeScript
 - [공식 문서](https://www.typescriptlang.org/)
 - [핸드북](https://www.typescriptlang.org/docs/handbook/intro.html)
@@ -123,4 +152,4 @@ react-kit-cli/
 ### chalk
 - [공식 문서](https://github.com/chalk/chalk)
 - [색상 목록](https://github.com/chalk/chalk#colors)
-- 콘솔 출력시 색상 정의 부분에서 사용했습니다. 
+- 콘솔 출력시 색상 정의 부분에서 사용했습니다.

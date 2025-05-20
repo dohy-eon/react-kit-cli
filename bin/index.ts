@@ -16,6 +16,13 @@ import {
   vitestScripts,
   testSetupContent,
 } from '../src/config/vitest';
+import {
+  reduxDependencies,
+  recoilDependencies,
+  reduxConfig,
+  reduxSliceConfig,
+  recoilConfig,
+} from '../src/config/state-management';
 
 const program = new Command();
 
@@ -56,6 +63,35 @@ async function addVitestConfig(projectPath: string): Promise<void> {
   await writeConfigFile(projectPath, 'src/test/setup.ts', testSetupContent);
 }
 
+async function addReduxConfig(projectPath: string): Promise<void> {
+  logger.info('Redux 설정을 추가합니다...');
+  
+  await writeConfigFile(projectPath, reduxConfig.path, reduxConfig.content);
+  await writeConfigFile(projectPath, reduxSliceConfig.path, reduxSliceConfig.content);
+  
+  await updatePackageJson(projectPath, (pkg) => ({
+    ...pkg,
+    dependencies: {
+      ...pkg.dependencies,
+      ...reduxDependencies,
+    },
+  }));
+}
+
+async function addRecoilConfig(projectPath: string): Promise<void> {
+  logger.info('Recoil 설정을 추가합니다...');
+  
+  await writeConfigFile(projectPath, recoilConfig.path, recoilConfig.content);
+  
+  await updatePackageJson(projectPath, (pkg) => ({
+    ...pkg,
+    dependencies: {
+      ...pkg.dependencies,
+      ...recoilDependencies,
+    },
+  }));
+}
+
 async function initProject(projectName: string, options: ProjectOptions): Promise<void> {
   try {
     if (!projectName) {
@@ -77,6 +113,14 @@ async function initProject(projectName: string, options: ProjectOptions): Promis
 
     if (options.withVitest) {
       await addVitestConfig(projectPath);
+    }
+
+    if (options.withRedux) {
+      await addReduxConfig(projectPath);
+    }
+
+    if (options.withRecoil) {
+      await addRecoilConfig(projectPath);
     }
 
     logger.success('\n프로젝트 생성이 완료되었습니다!');
@@ -101,6 +145,8 @@ program
   .argument('[projectName]', '프로젝트 이름')
   .option('--with-tailwind', 'Tailwind CSS 포함')
   .option('--with-vitest', 'Vitest 포함')
+  .option('--with-redux', 'Redux 포함')
+  .option('--with-recoil', 'Recoil 포함')
   .action(initProject);
 
 program.parse();
