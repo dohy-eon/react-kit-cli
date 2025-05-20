@@ -1,6 +1,8 @@
 export interface ProjectOptions {
   withTailwind?: boolean;
   withVitest?: boolean;
+  withRedux?: boolean;
+  withRecoil?: boolean;
 }
 
 export interface PackageJson {

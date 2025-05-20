@@ -1,29 +1,26 @@
-import { useState } from 'react';
-import './App.css';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { Counter } from './components/Counter';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-800 mb-8">
-          React + Tailwind
-        </h1>
-        
-        <div className="bg-white p-8 rounded-lg shadow-sm">
-          <p className="text-gray-600 mb-6">
-            카운터: {count}
-          </p>
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"
-          >
-            클릭
-          </button>
+    <Provider store={store}>
+      <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+          <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+            <div className="max-w-md mx-auto">
+              <div className="divide-y divide-gray-200">
+                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                  <h1 className="text-3xl font-bold text-center mb-8">Redux 카운터 테스트</h1>
+                  <Counter />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </Provider>
   );
 }
 

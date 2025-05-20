@@ -10,6 +10,7 @@ const logger_1 = require("../src/utils/logger");
 const file_1 = require("../src/utils/file");
 const tailwind_1 = require("../src/config/tailwind");
 const vitest_1 = require("../src/config/vitest");
+const state_management_1 = require("../src/config/state-management");
 const program = new commander_1.Command();
 async function addTailwindConfig(projectPath) {
     logger_1.logger.info('Tailwind CSS 설정을 추가합니다...');
@@ -40,6 +41,29 @@ async function addVitestConfig(projectPath) {
     }));
     await (0, file_1.writeConfigFile)(projectPath, 'src/test/setup.ts', vitest_1.testSetupContent);
 }
+async function addReduxConfig(projectPath) {
+    logger_1.logger.info('Redux 설정을 추가합니다...');
+    await (0, file_1.writeConfigFile)(projectPath, state_management_1.reduxConfig.path, state_management_1.reduxConfig.content);
+    await (0, file_1.writeConfigFile)(projectPath, state_management_1.reduxSliceConfig.path, state_management_1.reduxSliceConfig.content);
+    await (0, file_1.updatePackageJson)(projectPath, (pkg) => ({
+        ...pkg,
+        dependencies: {
+            ...pkg.dependencies,
+            ...state_management_1.reduxDependencies,
+        },
+    }));
+}
+async function addRecoilConfig(projectPath) {
+    logger_1.logger.info('Recoil 설정을 추가합니다...');
+    await (0, file_1.writeConfigFile)(projectPath, state_management_1.recoilConfig.path, state_management_1.recoilConfig.content);
+    await (0, file_1.updatePackageJson)(projectPath, (pkg) => ({
+        ...pkg,
+        dependencies: {
+            ...pkg.dependencies,
+            ...state_management_1.recoilDependencies,
+        },
+    }));
+}
 async function initProject(projectName, options) {
     try {
         if (!projectName) {
@@ -56,6 +80,12 @@ async function initProject(projectName, options) {
         }
         if (options.withVitest) {
             await addVitestConfig(projectPath);
+        }
+        if (options.withRedux) {
+            await addReduxConfig(projectPath);
+        }
+        if (options.withRecoil) {
+            await addRecoilConfig(projectPath);
         }
         logger_1.logger.success('\n프로젝트 생성이 완료되었습니다!');
         logger_1.logger.warning('\n다음 명령어로 시작하세요:');
@@ -78,5 +108,7 @@ program
     .argument('[projectName]', '프로젝트 이름')
     .option('--with-tailwind', 'Tailwind CSS 포함')
     .option('--with-vitest', 'Vitest 포함')
+    .option('--with-redux', 'Redux 포함')
+    .option('--with-recoil', 'Recoil 포함')
     .action(initProject);
 program.parse();
