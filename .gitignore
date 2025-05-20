@@ -4,3 +4,4 @@ dist/
 .prettiercache
 test-project-6/
 test-cli/
+node_modules
