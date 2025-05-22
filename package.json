@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "node dist/bin/index.js",
     "build": "tsc --project tsconfig.json && npm run copy-templates",
-    "copy-templates": "xcopy /E /I /Y /H templates dist\\templates",
+    "copy-templates": "node scripts/copy-templates.js",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
