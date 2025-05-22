@@ -43,6 +43,16 @@ React 프로젝트를 시작할 때마다 반복되는 설정 작업들:
   - 기본 상태관리 템플릿 제공
   - TypeScript 타입 지원
 
+- **자동화된 CI/CD**
+  - GitHub Actions를 통한 자동 빌드 및 테스트
+  - 린트, 포맷팅, 타입 체크 자동화
+  - npm 배포 자동화 (태그 기반)
+
+- **테스트 환경**
+  - Jest를 통한 단위 테스트
+  - 80% 이상의 코드 커버리지 요구
+  - TypeScript 테스트 지원
+
 ## ⚡ 시작하기
 
 ### 설치
@@ -174,3 +184,15 @@ react-kit-cli/
 - [공식 문서](https://github.com/chalk/chalk)
 - [색상 목록](https://github.com/chalk/chalk#colors)
 - 콘솔 출력시 색상 정의 부분에서 사용했습니다.
+
+### Jest
+
+- [공식 문서](https://jestjs.io/)
+- [TypeScript 설정 가이드](https://jestjs.io/docs/getting-started#using-typescript)
+- 단위 테스트 및 코드 커버리지 측정에 사용했습니다.
+
+### GitHub Actions
+
+- [공식 문서](https://docs.github.com/en/actions)
+- [Node.js 워크플로우 가이드](https://docs.github.com/en/actions/guides/building-and-testing-nodejs)
+- CI/CD 파이프라인 구축에 사용했습니다.
