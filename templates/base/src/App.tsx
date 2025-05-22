@@ -11,9 +11,7 @@ function App() {
           <div className="max-w-md mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
             {/* 헤더 */}
             <div className="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-8">
-              <h1 className="text-2xl font-bold text-white text-center">
-                Redux 카운터 데모
-              </h1>
+              <h1 className="text-2xl font-bold text-white text-center">Redux 카운터 데모</h1>
             </div>
 
             {/* 메인 컨텐츠 */}

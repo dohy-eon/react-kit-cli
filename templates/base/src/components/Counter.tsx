@@ -3,15 +3,13 @@ import { useAppDispatch, useAppSelector } from '../store';
 import { increment, decrement, incrementByAmount } from '../store/features/counter/counterSlice';
 
 export const Counter: React.FC = () => {
-  const count = useAppSelector((state) => state.counter.value);
+  const count = useAppSelector(state => state.counter.value);
   const dispatch = useAppDispatch();
 
   return (
     <div className="flex flex-col items-center space-y-6">
       {/* 카운터 표시 */}
-      <div className="text-6xl font-bold text-gray-800">
-        {count}
-      </div>
+      <div className="text-6xl font-bold text-gray-800">{count}</div>
 
       {/* 버튼 그룹 */}
       <div className="flex space-x-4">
@@ -41,4 +39,4 @@ export const Counter: React.FC = () => {
       </div>
     </div>
   );
-}; 
+};
