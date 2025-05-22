@@ -3,7 +3,12 @@ import { Command } from 'commander';
 import path from 'path';
 import { ProjectOptions } from '../src/types';
 import { logger } from '../src/utils/logger';
-import { createProjectDirectory, copyTemplateFiles, updatePackageJson, writeConfigFile } from '../src/utils/file';
+import {
+  createProjectDirectory,
+  copyTemplateFiles,
+  updatePackageJson,
+  writeConfigFile,
+} from '../src/utils/file';
 import {
   tailwindConfig,
   postcssConfig,
@@ -28,11 +33,11 @@ const program = new Command();
 
 async function addTailwindConfig(projectPath: string): Promise<void> {
   logger.info('Tailwind CSS 설정을 추가합니다...');
-  
+
   await writeConfigFile(projectPath, tailwindConfig.path, tailwindConfig.content);
   await writeConfigFile(projectPath, postcssConfig.path, postcssConfig.content);
-  
-  await updatePackageJson(projectPath, (pkg) => ({
+
+  await updatePackageJson(projectPath, pkg => ({
     ...pkg,
     devDependencies: {
       ...pkg.devDependencies,
@@ -45,10 +50,10 @@ async function addTailwindConfig(projectPath: string): Promise<void> {
 
 async function addVitestConfig(projectPath: string): Promise<void> {
   logger.info('Vitest 설정을 추가합니다...');
-  
+
   await writeConfigFile(projectPath, vitestConfig.path, vitestConfig.content);
-  
-  await updatePackageJson(projectPath, (pkg) => ({
+
+  await updatePackageJson(projectPath, pkg => ({
     ...pkg,
     devDependencies: {
       ...pkg.devDependencies,
@@ -65,11 +70,11 @@ async function addVitestConfig(projectPath: string): Promise<void> {
 
 async function addReduxConfig(projectPath: string): Promise<void> {
   logger.info('Redux 설정을 추가합니다...');
-  
+
   await writeConfigFile(projectPath, reduxConfig.path, reduxConfig.content);
   await writeConfigFile(projectPath, reduxSliceConfig.path, reduxSliceConfig.content);
-  
-  await updatePackageJson(projectPath, (pkg) => ({
+
+  await updatePackageJson(projectPath, pkg => ({
     ...pkg,
     dependencies: {
       ...pkg.dependencies,
@@ -80,10 +85,10 @@ async function addReduxConfig(projectPath: string): Promise<void> {
 
 async function addRecoilConfig(projectPath: string): Promise<void> {
   logger.info('Recoil 설정을 추가합니다...');
-  
+
   await writeConfigFile(projectPath, recoilConfig.path, recoilConfig.content);
-  
-  await updatePackageJson(projectPath, (pkg) => ({
+
+  await updatePackageJson(projectPath, pkg => ({
     ...pkg,
     dependencies: {
       ...pkg.dependencies,
@@ -134,10 +139,7 @@ async function initProject(projectName: string, options: ProjectOptions): Promis
   }
 }
 
-program
-  .name('react-kit')
-  .description('리액트 프로젝트 세팅 도구')
-  .version('1.0.0');
+program.name('react-kit').description('리액트 프로젝트 세팅 도구').version('1.0.0');
 
 program
   .command('init')

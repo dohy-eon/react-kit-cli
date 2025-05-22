@@ -18,7 +18,7 @@ export async function copyTemplateFiles(templatePath: string, projectPath: strin
 
   // 나머지 파일 복사 (vite.config.js 제외)
   await fs.copy(templatePath, projectPath, {
-    filter: (src) => !src.endsWith('package.json') && !src.endsWith('vite.config.js'),
+    filter: src => !src.endsWith('package.json') && !src.endsWith('vite.config.js'),
   });
 }
 
@@ -40,4 +40,4 @@ export async function writeConfigFile(
   const fullPath = path.join(projectPath, filePath);
   await fs.ensureDir(path.dirname(fullPath));
   await fs.writeFile(fullPath, content);
-} 
+}

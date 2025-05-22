@@ -16,4 +16,4 @@ export interface PackageJson {
 export interface ConfigFile {
   path: string;
   content: string;
-} 
+}

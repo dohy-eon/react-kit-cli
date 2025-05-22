@@ -15,4 +15,4 @@ export const logger = {
       console.log(chalk.gray(`[DEBUG] ${message}`));
     }
   },
-}; 
+};

@@ -29,4 +29,4 @@ export const vitestScripts = {
   coverage: 'vitest run --coverage',
 };
 
-export const testSetupContent = `import '@testing-library/jest-dom';`; 
+export const testSetupContent = `import '@testing-library/jest-dom';`;

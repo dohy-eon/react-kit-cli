@@ -1,17 +1,47 @@
 {
   "name": "react-kit-cli",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "description": "A CLI tool for creating React projects with Redux and Recoil",
+  "main": "dist/bin/index.js",
   "bin": {
     "react-kit": "./dist/bin/index.js"
   },
+  "files": [
+    "dist",
+    "templates"
+  ],
   "scripts": {
     "dev": "node dist/bin/index.js",
     "build": "tsc --project tsconfig.json && npm run copy-templates",
-    "copy-templates": "xcopy /E /I /Y /H templates dist\\templates",
+    "copy-templates": "node scripts/copy-templates.js",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "prepublishOnly": "npm run build",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
+  "keywords": [
+    "react",
+    "cli",
+    "redux",
+    "recoil",
+    "typescript",
+    "vite"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dohy-eon/react-kit-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dohy-eon/react-kit-cli/issues"
+  },
+  "homepage": "https://github.com/dohy-eon/react-kit-cli#readme",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
     "@types/fs-extra": "^11.0.4",
@@ -25,6 +55,7 @@
   },
   "devDependencies": {
     "@types/commander": "^2.12.5",
+    "@types/jest": "^29.5.12",
     "@types/node": "^22.15.18",
     "@types/react": "^18.3.21",
     "@types/react-dom": "^18.3.7",
@@ -32,12 +63,14 @@
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
     "@vitejs/plugin-react": "^4.0.0",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "jest": "^29.7.0",
     "prettier": "^3.5.3",
+    "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "vite": "^5.0.0"

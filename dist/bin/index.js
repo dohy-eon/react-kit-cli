@@ -16,7 +16,7 @@ async function addTailwindConfig(projectPath) {
     logger_1.logger.info('Tailwind CSS 설정을 추가합니다...');
     await (0, file_1.writeConfigFile)(projectPath, tailwind_1.tailwindConfig.path, tailwind_1.tailwindConfig.content);
     await (0, file_1.writeConfigFile)(projectPath, tailwind_1.postcssConfig.path, tailwind_1.postcssConfig.content);
-    await (0, file_1.updatePackageJson)(projectPath, (pkg) => ({
+    await (0, file_1.updatePackageJson)(projectPath, pkg => ({
         ...pkg,
         devDependencies: {
             ...pkg.devDependencies,
@@ -28,7 +28,7 @@ async function addTailwindConfig(projectPath) {
 async function addVitestConfig(projectPath) {
     logger_1.logger.info('Vitest 설정을 추가합니다...');
     await (0, file_1.writeConfigFile)(projectPath, vitest_1.vitestConfig.path, vitest_1.vitestConfig.content);
-    await (0, file_1.updatePackageJson)(projectPath, (pkg) => ({
+    await (0, file_1.updatePackageJson)(projectPath, pkg => ({
         ...pkg,
         devDependencies: {
             ...pkg.devDependencies,
@@ -45,7 +45,7 @@ async function addReduxConfig(projectPath) {
     logger_1.logger.info('Redux 설정을 추가합니다...');
     await (0, file_1.writeConfigFile)(projectPath, state_management_1.reduxConfig.path, state_management_1.reduxConfig.content);
     await (0, file_1.writeConfigFile)(projectPath, state_management_1.reduxSliceConfig.path, state_management_1.reduxSliceConfig.content);
-    await (0, file_1.updatePackageJson)(projectPath, (pkg) => ({
+    await (0, file_1.updatePackageJson)(projectPath, pkg => ({
         ...pkg,
         dependencies: {
             ...pkg.dependencies,
@@ -56,7 +56,7 @@ async function addReduxConfig(projectPath) {
 async function addRecoilConfig(projectPath) {
     logger_1.logger.info('Recoil 설정을 추가합니다...');
     await (0, file_1.writeConfigFile)(projectPath, state_management_1.recoilConfig.path, state_management_1.recoilConfig.content);
-    await (0, file_1.updatePackageJson)(projectPath, (pkg) => ({
+    await (0, file_1.updatePackageJson)(projectPath, pkg => ({
         ...pkg,
         dependencies: {
             ...pkg.dependencies,
@@ -98,10 +98,7 @@ async function initProject(projectName, options) {
         process.exit(1);
     }
 }
-program
-    .name('react-kit')
-    .description('리액트 프로젝트 세팅 도구')
-    .version('1.0.0');
+program.name('react-kit').description('리액트 프로젝트 세팅 도구').version('1.0.0');
 program
     .command('init')
     .description('기본 템플릿 적용')

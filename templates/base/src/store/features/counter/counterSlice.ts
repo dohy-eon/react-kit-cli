@@ -18,11 +18,11 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     // 증가
-    increment: (state) => {
+    increment: state => {
       state.value += 1;
     },
     // 감소
-    decrement: (state) => {
+    decrement: state => {
       state.value -= 1;
     },
     // 특정 값만큼 증가
@@ -34,4 +34,4 @@ export const counterSlice = createSlice({
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
-export default counterSlice.reducer; 
+export default counterSlice.reducer;
