@@ -57,8 +57,22 @@ React 프로젝트를 시작할 때마다 반복되는 설정 작업들:
 
 ### 설치
 
+npm을 통한 전역 설치:
+
 ```bash
-npm install -g react-kit-cli
+npm install -g react-kit-cli@latest
+```
+
+특정 버전 설치:
+
+```bash
+npm install -g react-kit-cli@1.1.0
+```
+
+설치 확인:
+
+```bash
+react-kit --version
 ```
 
 ### 사용법
@@ -66,37 +80,37 @@ npm install -g react-kit-cli
 기본 프로젝트 생성:
 
 ```bash
-react-kit init my-project
+react-kit create my-project
 ```
 
 Tailwind CSS 포함:
 
 ```bash
-react-kit init my-project --with-tailwind
+react-kit create my-project --with-tailwind
 ```
 
 Vitest 포함:
 
 ```bash
-react-kit init my-project --with-vitest
+react-kit create my-project --with-vitest
 ```
 
 Redux 포함:
 
 ```bash
-react-kit init my-project --with-redux
+react-kit create my-project --with-redux
 ```
 
 Recoil 포함:
 
 ```bash
-react-kit init my-project --with-recoil
+react-kit create my-project --with-recoil
 ```
 
 모든 기능 포함:
 
 ```bash
-react-kit init my-project --with-tailwind --with-vitest --with-redux
+react-kit create my-project --with-tailwind --with-vitest --with-redux
 ```
 
 ### 린트 및 포맷팅
@@ -116,6 +130,7 @@ npm run format
 
 ```
 react-kit-cli/
+├── .github/          # GitHub Actions 워크플로우
 ├── bin/              # CLI 실행 파일
 ├── src/              # 소스 코드
 │   ├── config/       # 설정 파일
@@ -125,7 +140,9 @@ react-kit-cli/
 │   ├── base/         # 기본 템플릿
 │   ├── redux/        # Redux 템플릿
 │   └── recoil/       # Recoil 템플릿
-└── dist/            # 빌드 결과물
+├── scripts/          # 빌드 및 유틸리티 스크립트
+├── dist/            # 빌드 결과물
+└── __tests__/       # 테스트 파일
 ```
 
 ## 📚 라이브러리 레퍼런스
