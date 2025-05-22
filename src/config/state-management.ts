@@ -8,7 +8,7 @@ export const reduxDependencies = {
 
 // Recoil 의존성
 export const recoilDependencies = {
-  'recoil': '^0.7.7',
+  recoil: '^0.7.7',
 };
 
 // Redux 스토어 설정
@@ -110,4 +110,4 @@ export const asyncCounterSelector = selector({
     return count * 2;
   },
 });`,
-}; 
+};

@@ -33,4 +33,4 @@ export const tailwindDependencies = {
 
 export const tailwindCssContent = `@tailwind base;
 @tailwind components;
-@tailwind utilities;`; 
+@tailwind utilities;`;
