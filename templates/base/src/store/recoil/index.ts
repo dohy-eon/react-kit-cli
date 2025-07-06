@@ -23,7 +23,7 @@ export const asyncCounterSelector = selector({
   get: async ({ get }) => {
     const count = get(counterState);
     // API 호출
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     return count * 2;
   },
 });
