@@ -8,13 +8,13 @@ async function copyTemplates() {
   try {
     // Ensure target directory exists
     await fs.ensureDir(targetDir);
-    
+
     // Copy templates directory
     await fs.copy(sourceDir, targetDir, {
       overwrite: true,
-      errorOnExist: false
+      errorOnExist: false,
     });
-    
+
     console.log('Templates copied successfully!');
   } catch (err) {
     console.error('Error copying templates:', err);
@@ -22,4 +22,4 @@ async function copyTemplates() {
   }
 }
 
-copyTemplates(); 
+copyTemplates();

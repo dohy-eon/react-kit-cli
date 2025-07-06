@@ -9,16 +9,26 @@ export async function createProjectDirectory(projectPath: string): Promise<void>
   await fs.mkdir(projectPath);
 }
 
-export async function copyTemplateFiles(templatePath: string, projectPath: string): Promise<void> {
-  // package.json 복사
-  await fs.copyFile(
-    path.join(templatePath, 'package.json'),
-    path.join(projectPath, 'package.json')
-  );
+export async function processTemplateContent(
+  content: string,
+  projectName: string
+): Promise<string> {
+  return content.replace(/\{\{projectName\}\}/g, projectName);
+}
 
-  // 나머지 파일 복사 (vite.config.js 제외)
+export async function copyTemplateFiles(
+  templatePath: string,
+  projectPath: string,
+  projectName: string
+): Promise<void> {
+  // package.json 처리
+  const packageJsonContent = await fs.readFile(path.join(templatePath, 'package.json'), 'utf-8');
+  const processedPackageJson = await processTemplateContent(packageJsonContent, projectName);
+  await fs.writeFile(path.join(projectPath, 'package.json'), processedPackageJson);
+
+  // 나머지 파일 복사
   await fs.copy(templatePath, projectPath, {
-    filter: src => !src.endsWith('package.json') && !src.endsWith('vite.config.js'),
+    filter: src => !src.endsWith('package.json'),
   });
 }
 
