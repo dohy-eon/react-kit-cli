@@ -33,11 +33,9 @@ const program = new Command();
 
 function validateProjectName(projectName: string): void {
   if (!/^[a-z0-9-]+$/.test(projectName)) {
-    throw new Error(
-      '프로젝트 이름은 소문자, 숫자, 하이픈만 사용할 수 있습니다.'
-    );
+    throw new Error('프로젝트 이름은 소문자, 숫자, 하이픈만 사용할 수 있습니다.');
   }
-  
+
   if (projectName.length < 1 || projectName.length > 50) {
     throw new Error('프로젝트 이름은 1-50자 사이여야 합니다.');
   }
@@ -124,7 +122,7 @@ async function initProject(projectName: string, options: ProjectOptions): Promis
 
     // 프로젝트 이름 검증
     validateProjectName(projectName);
-    
+
     // 옵션 검증
     validateOptions(options);
 
