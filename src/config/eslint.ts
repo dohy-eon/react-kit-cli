@@ -1,4 +1,8 @@
-module.exports = {
+import { ConfigFile } from '../types';
+
+export const eslintConfig: ConfigFile = {
+  path: '.eslintrc.cjs',
+  content: `module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
@@ -15,4 +19,5 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
-} 
+}`,
+};
