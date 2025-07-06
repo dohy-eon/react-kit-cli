@@ -113,6 +113,12 @@ react-kit create my-project --with-recoil
 react-kit create my-project --with-tailwind --with-vitest --with-redux
 ```
 
+### 프로젝트 이름 규칙
+
+- 소문자, 숫자, 하이픈(-)만 사용 가능
+- 1-50자 사이
+- 예: `my-project`, `react-app-2024`, `todo-app`
+
 ### 린트 및 포맷팅
 
 ```bash
