@@ -1,10 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../store';
-import {
-  increment,
-  decrement,
-  incrementByAmount,
-} from '../store/features/counter/counterSlice';
+import { increment, decrement, incrementByAmount } from '../store/features/counter/counterSlice';
 
 export const Counter: React.FC = () => {
   const count = useAppSelector((state) => state.counter.value);
@@ -38,9 +34,7 @@ export const Counter: React.FC = () => {
       </div>
 
       {/* 상태 표시 */}
-      <div className="text-sm text-gray-500">
-        {count === 0 ? '초기값' : count > 0 ? '양수' : '음수'}
-      </div>
+      <div className="text-sm text-gray-500">{count === 0 ? '초기값' : count > 0 ? '양수' : '음수'}</div>
     </div>
   );
 };
