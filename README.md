@@ -38,12 +38,14 @@ React 프로젝트를 시작할 때마다 반복되는 설정 작업들:
   - 테스트 스크립트 자동 추가
 
 - **상태관리 통합**
+
   - `--with-redux` 옵션으로 Redux 설정 추가
   - `--with-recoil` 옵션으로 Recoil 설정 추가
   - 기본 상태관리 템플릿 제공
   - TypeScript 타입 지원
 
 - **자동화된 CI/CD**
+
   - GitHub Actions를 통한 자동 빌드 및 테스트
   - 린트, 포맷팅, 타입 체크 자동화
   - npm 배포 자동화 (태그 기반)
@@ -112,6 +114,12 @@ react-kit create my-project --with-recoil
 ```bash
 react-kit create my-project --with-tailwind --with-vitest --with-redux
 ```
+
+### 프로젝트 이름 규칙
+
+- 소문자, 숫자, 하이픈(-)만 사용 가능
+- 1-50자 사이
+- 예: `my-project`, `react-app-2024`, `todo-app`
 
 ### 린트 및 포맷팅
 

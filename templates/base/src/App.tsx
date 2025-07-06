@@ -21,9 +21,7 @@ function App() {
 
             {/* 푸터 */}
             <div className="bg-gray-50 px-6 py-4 border-t border-gray-100">
-              <p className="text-sm text-gray-500 text-center">
-                React Kit CLI로 생성된 Redux 데모 프로젝트
-              </p>
+              <p className="text-sm text-gray-500 text-center">React Kit CLI Demo</p>
             </div>
           </div>
         </div>
