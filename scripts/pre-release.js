@@ -184,7 +184,7 @@ class PreReleaseChecker {
     console.log(chalk.cyan('🔍 릴리즈 사전 검사를 시작합니다...\n'));
 
     this.showCurrentVersion();
-    
+
     if (versionType) {
       const nextVersion = this.calculateNextVersion(versionType);
       if (nextVersion) {
@@ -197,7 +197,9 @@ class PreReleaseChecker {
     const checks = [
       { name: 'Git 상태', fn: () => this.checkGitStatus() },
       { name: '브랜치', fn: () => this.checkBranch() },
-      ...(options.skipRemoteCheck ? [] : [{ name: '원격 동기화', fn: () => this.checkRemoteSync() }]),
+      ...(options.skipRemoteCheck
+        ? []
+        : [{ name: '원격 동기화', fn: () => this.checkRemoteSync() }]),
       { name: '테스트', fn: () => this.runTests() },
       { name: '린트', fn: () => this.runLint() },
       { name: '포맷팅', fn: () => this.checkFormatting() },
@@ -205,12 +207,12 @@ class PreReleaseChecker {
     ];
 
     const results = [];
-    
+
     for (const check of checks) {
       console.log(chalk.blue(`\n${check.name} 확인 중...`));
       const result = check.fn();
       results.push({ name: check.name, passed: result });
-      
+
       if (!result) {
         console.log(chalk.red(`❌ ${check.name} 실패`));
       } else {
@@ -222,7 +224,7 @@ class PreReleaseChecker {
     console.log(chalk.cyan('\n📊 검사 결과 요약:'));
     const passed = results.filter(r => r.passed).length;
     const total = results.length;
-    
+
     results.forEach(result => {
       const status = result.passed ? chalk.green('✅') : chalk.red('❌');
       console.log(`  ${status} ${result.name}`);
