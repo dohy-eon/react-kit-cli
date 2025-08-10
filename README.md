@@ -161,6 +161,95 @@ npm run lint:fix
 npm run format
 ```
 
+## 🚀 릴리즈 및 배포
+
+### 릴리즈 프로세스
+
+React Kit CLI는 자동화된 릴리즈 프로세스를 제공합니다:
+
+#### 1. 사전 검사 (Pre-release Check)
+
+릴리즈 전 모든 검사를 수행합니다:
+
+```bash
+# 기본 사전 검사
+npm run pre-release
+
+# 특정 버전 타입으로 사전 검사
+npm run pre-release patch
+npm run pre-release minor
+npm run pre-release major
+
+# 원격 동기화 검사 건너뛰기
+npm run pre-release patch -- --skip-remote-check
+```
+
+**검사 항목:**
+- ✅ Git 상태 확인 (커밋되지 않은 변경사항)
+- ✅ 브랜치 확인 (main 브랜치)
+- ✅ 원격 저장소 동기화 확인
+- ✅ 테스트 실행
+- ✅ 린트 검사
+- ✅ 포맷팅 확인
+- ✅ 빌드 테스트
+
+#### 2. 릴리즈 실행
+
+모든 검사를 통과한 후 릴리즈를 실행합니다:
+
+```bash
+# 패치 버전 릴리즈 (1.2.0 → 1.2.1)
+npm run release:patch
+
+# 마이너 버전 릴리즈 (1.2.0 → 1.3.0)
+npm run release:minor
+
+# 메이저 버전 릴리즈 (1.2.0 → 2.0.0)
+npm run release:major
+```
+
+**릴리즈 프로세스:**
+1. 🔍 사전 검사 실행
+2. 📦 버전 업데이트
+3. 💾 변경사항 커밋
+4. 🏷️ 태그 생성
+5. 🚀 원격 저장소 푸시
+6. 📦 npm 배포
+
+#### 3. 롤백 (Rollback)
+
+릴리즈 실패 시 이전 버전으로 롤백할 수 있습니다:
+
+```bash
+# 최신 태그로 롤백
+npm run rollback
+
+# 특정 태그로 롤백
+npm run rollback v1.2.0
+
+# 사용 가능한 태그 목록 확인
+npm run rollback:list
+```
+
+**롤백 프로세스:**
+1. 🔍 Git 상태 확인
+2. 🔄 특정 커밋으로 리셋
+3. 🗑️ 최신 태그 삭제 (필요시)
+4. 🚀 강제 푸시
+
+### 버전 관리
+
+- **Patch (패치)**: 버그 수정 (1.2.0 → 1.2.1)
+- **Minor (마이너)**: 새로운 기능 추가 (1.2.0 → 1.3.0)
+- **Major (메이저)**: 호환성 깨지는 변경 (1.2.0 → 2.0.0)
+
+### 안전 기능
+
+- **자동 검사**: 릴리즈 전 모든 품질 검사 자동 실행
+- **에러 처리**: 각 단계별 상세한 에러 메시지
+- **롤백 지원**: 실패 시 안전한 롤백 기능
+- **선택적 검사**: 원격 동기화 검사 건너뛰기 옵션
+
 ## 📁 프로젝트 구조
 
 ```
@@ -168,14 +257,18 @@ react-kit-cli/
 ├── .github/          # GitHub Actions 워크플로우
 ├── bin/              # CLI 실행 파일
 ├── src/              # 소스 코드
+│   ├── cli/          # CLI 명령어 처리
 │   ├── config/       # 설정 파일
 │   ├── types/        # 타입 정의
-│   └── utils/        # 유틸리티 함수
+│   └── utils/        # 유틸리티 클래스 및 함수
 ├── templates/        # 프로젝트 템플릿
 │   ├── base/         # 기본 템플릿
 │   ├── redux/        # Redux 템플릿
 │   └── recoil/       # Recoil 템플릿
-├── scripts/          # 빌드 및 유틸리티 스크립트
+├── scripts/          # 빌드 및 릴리즈 스크립트
+│   ├── release.js    # 릴리즈 자동화
+│   ├── pre-release.js # 사전 검사
+│   └── rollback.js   # 롤백 스크립트
 ├── dist/            # 빌드 결과물
 └── __tests__/       # 테스트 파일
 ```
