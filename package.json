@@ -22,6 +22,12 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "prepublishOnly": "npm run build",
+    "pre-release": "node scripts/pre-release.js",
+    "release:patch": "node scripts/release.js patch",
+    "release:minor": "node scripts/release.js minor",
+    "release:major": "node scripts/release.js major",
+    "rollback": "node scripts/rollback.js",
+    "rollback:list": "node scripts/rollback.js --list",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },

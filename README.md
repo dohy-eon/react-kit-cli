@@ -4,6 +4,33 @@ React Kit CLI는 React 프로젝트를 빠르게 설정하고 시작하도록 �
 
 TypeScript, ESLint, Prettier, Tailwind CSS, Vitest 등의 개발 도구들을 자동으로 설정해주어 개발 환경 구축 시간을 단축시키는데 목표를 두었습니다.
 
+## 🏗️ 아키텍처
+
+React Kit CLI는 클래스 기반의 모듈화된 아키텍처를 사용하여 유지보수성과 확장성을 보장합니다:
+
+### 핵심 클래스들
+
+- **`ProjectValidator`**: 프로젝트 이름과 옵션 검증
+- **`ProjectGenerator`**: 프로젝트 생성 프로세스 관리
+- **`ConfigManager`**: 다양한 설정(Tailwind, Vitest, Redux, Recoil) 추가
+- **`Commands`**: CLI 명령어 처리
+
+### 디렉토리 구조
+
+```
+src/
+├── cli/           # CLI 관련 클래스들
+├── config/        # 설정 파일들 (Tailwind, Vitest, Redux, Recoil)
+├── types/         # TypeScript 타입 정의
+└── utils/         # 유틸리티 클래스들과 함수들
+```
+
+### 에러 처리
+
+- **`ProjectCreationError`**: 프로젝트 생성 중 발생하는 에러
+- **`ValidationError`**: 검증 실패 시 발생하는 에러
+- **`TemplateError`**: 템플릿 처리 중 발생하는 에러
+
 ## 🛠️ 해결하고자 하는 문제
 
 React 프로젝트를 시작할 때마다 반복되는 설정 작업들:
