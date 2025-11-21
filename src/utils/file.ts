@@ -72,11 +72,11 @@ export async function mergeConfigFile(
 ): Promise<void> {
   const fullPath = path.join(projectPath, filePath);
   let existingContent = '';
-  
+
   if (await fs.pathExists(fullPath)) {
     existingContent = await fs.readFile(fullPath, 'utf-8');
   }
-  
+
   const mergedContent = mergeFn(existingContent);
   await fs.ensureDir(path.dirname(fullPath));
   await fs.writeFile(fullPath, mergedContent);

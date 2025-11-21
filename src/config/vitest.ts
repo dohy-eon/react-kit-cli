@@ -1,5 +1,3 @@
-import { ConfigFile } from '../types';
-
 // vite.config.ts에 병합할 test 설정 내용
 export const vitestTestConfig = `  test: {
     globals: true,
@@ -35,7 +33,7 @@ export function mergeVitestConfigToViteConfig(existingContent: string): string {
   // plugins 다음에 test를 추가하는 것이 가장 안전
   const pluginsPattern = /(plugins:\s*\[[^\]]*\],?)/;
   const pluginsMatch = content.match(pluginsPattern);
-  
+
   if (pluginsMatch) {
     // plugins 다음에 test 추가
     const insertIndex = pluginsMatch.index! + pluginsMatch[0].length;
@@ -43,7 +41,7 @@ export function mergeVitestConfigToViteConfig(existingContent: string): string {
     const afterPlugins = content.substring(insertIndex);
     const needsNewline = !afterPlugins.match(/^\s*\n/);
     const newline = needsNewline ? '\n' : '';
-    
+
     content =
       content.substring(0, insertIndex) +
       newline +

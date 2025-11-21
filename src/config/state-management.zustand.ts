@@ -74,4 +74,3 @@ export const Counter: React.FC = () => {
   );
 };`,
 };
-

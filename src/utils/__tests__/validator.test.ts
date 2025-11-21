@@ -34,7 +34,7 @@ describe('ProjectValidator', () => {
   });
 
   describe('validateOptions', () => {
-    it('Redux와 Recoil이 동시에 설정된 경우 경고를 표시해야 합니다', () => {
+    it('여러 상태관리 라이브러리가 동시에 설정된 경우 경고를 표시해야 합니다', () => {
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
 
       ProjectValidator.validateOptions({
@@ -43,7 +43,7 @@ describe('ProjectValidator', () => {
       });
 
       expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Redux와 Recoil을 동시에 사용하는 것은 권장하지 않습니다')
+        expect.stringContaining('두 개 이상의 상태 관리 라이브러리가 선택되었습니다')
       );
 
       consoleSpy.mockRestore();
@@ -55,10 +55,11 @@ describe('ProjectValidator', () => {
       ProjectValidator.validateOptions({
         withRedux: true,
         withRecoil: false,
+        withZustand: false,
       });
 
       expect(consoleSpy).not.toHaveBeenCalledWith(
-        expect.stringContaining('Redux와 Recoil을 동시에 사용하는 것은 권장하지 않습니다')
+        expect.stringContaining('두 개 이상의 상태 관리 라이브러리가 선택되었습니다')
       );
 
       consoleSpy.mockRestore();
