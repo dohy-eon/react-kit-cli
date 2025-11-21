@@ -69,3 +69,56 @@ export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 // reducer 내보내기
 export default counterSlice.reducer;`,
 };
+
+export const reduxAppConfig: ConfigFile = {
+  path: 'src/App.tsx',
+  content: `import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { Counter } from './components/Counter';
+import './App.css';
+
+function App() {
+  return (
+    <Provider store={store}>
+      <div className="app">
+        <header>
+          <h1>Redux 카운터 데모</h1>
+        </header>
+        <main>
+          <Counter />
+        </main>
+      </div>
+    </Provider>
+  );
+}
+
+export default App;`,
+};
+
+export const reduxCounterConfig: ConfigFile = {
+  path: 'src/components/Counter.tsx',
+  content: `import React from 'react';
+import { useAppDispatch, useAppSelector } from '../store';
+import { increment, decrement, incrementByAmount } from '../store/features/counter/counterSlice';
+
+export const Counter: React.FC = () => {
+  const count = useAppSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
+
+  return (
+    <div className="counter">
+      <h2>카운터</h2>
+      <div className="counter-display">
+        <span className="counter-value">{count}</span>
+      </div>
+      <div className="counter-buttons">
+        <button onClick={() => dispatch(decrement())}>감소</button>
+        <button onClick={() => dispatch(incrementByAmount(-count))}>리셋</button>
+        <button onClick={() => dispatch(increment())}>증가</button>
+        <button onClick={() => dispatch(incrementByAmount(5))}>+5</button>
+      </div>
+    </div>
+  );
+};`,
+};

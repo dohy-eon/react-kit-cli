@@ -1,24 +1,29 @@
 import { ProjectConfig, TemplateError } from '../types';
 import { logger } from './logger';
-import { writeConfigFile, updatePackageJson } from './file';
+import { writeConfigFile, updatePackageJson, mergeConfigFile } from './file';
 import {
   tailwindConfig,
   postcssConfig,
   tailwindDependencies,
-  tailwindCssContent,
+  mergeTailwindCssContent,
 } from '../config/tailwind';
 import {
-  vitestConfig,
   vitestDependencies,
   vitestScripts,
   testSetupContent,
+  mergeVitestConfigToViteConfig,
 } from '../config/vitest';
 import {
   reduxDependencies,
   recoilDependencies,
   reduxConfig,
   reduxSliceConfig,
+  reduxAppConfig,
+  reduxCounterConfig,
   recoilConfig,
+  recoilMainConfig,
+  recoilAppConfig,
+  recoilCounterConfig,
 } from '../config/state-management';
 
 export class ConfigManager {
@@ -72,7 +77,8 @@ export class ConfigManager {
       },
     }));
 
-    await writeConfigFile(projectPath, 'src/index.css', tailwindCssContent);
+    // 기존 CSS 내용을 유지하면서 Tailwind 지시문 추가
+    await mergeConfigFile(projectPath, 'src/index.css', mergeTailwindCssContent);
   }
 
   /**
@@ -83,7 +89,8 @@ export class ConfigManager {
 
     const { projectPath } = this.config;
 
-    await writeConfigFile(projectPath, vitestConfig.path, vitestConfig.content);
+    // vite.config.ts에 test 설정 병합
+    await mergeConfigFile(projectPath, 'vite.config.ts', mergeVitestConfigToViteConfig);
 
     await updatePackageJson(projectPath, pkg => ({
       ...pkg,
@@ -108,8 +115,13 @@ export class ConfigManager {
 
     const { projectPath } = this.config;
 
+    // Store 설정 파일
     await writeConfigFile(projectPath, reduxConfig.path, reduxConfig.content);
     await writeConfigFile(projectPath, reduxSliceConfig.path, reduxSliceConfig.content);
+
+    // App.tsx와 Counter.tsx를 Redux 버전으로 교체
+    await writeConfigFile(projectPath, reduxAppConfig.path, reduxAppConfig.content);
+    await writeConfigFile(projectPath, reduxCounterConfig.path, reduxCounterConfig.content);
 
     await updatePackageJson(projectPath, pkg => ({
       ...pkg,
@@ -128,7 +140,15 @@ export class ConfigManager {
 
     const { projectPath } = this.config;
 
+    // Store 설정 파일
     await writeConfigFile(projectPath, recoilConfig.path, recoilConfig.content);
+
+    // main.tsx에 RecoilRoot 추가
+    await writeConfigFile(projectPath, recoilMainConfig.path, recoilMainConfig.content);
+
+    // App.tsx와 Counter.tsx를 Recoil 버전으로 교체
+    await writeConfigFile(projectPath, recoilAppConfig.path, recoilAppConfig.content);
+    await writeConfigFile(projectPath, recoilCounterConfig.path, recoilCounterConfig.content);
 
     await updatePackageJson(projectPath, pkg => ({
       ...pkg,
