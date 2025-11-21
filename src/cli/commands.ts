@@ -26,6 +26,7 @@ export class Commands {
       .option('--with-vitest', 'Vitest 포함')
       .option('--with-redux', 'Redux 포함')
       .option('--with-recoil', 'Recoil 포함')
+      .option('--with-zustand', 'Zustand 포함')
       .action(this.handleCreateCommand.bind(this));
   }
 

@@ -16,6 +16,7 @@ import {
 import {
   reduxDependencies,
   recoilDependencies,
+  zustandDependencies,
   reduxConfig,
   reduxSliceConfig,
   reduxAppConfig,
@@ -24,6 +25,9 @@ import {
   recoilMainConfig,
   recoilAppConfig,
   recoilCounterConfig,
+  zustandConfig,
+  zustandAppConfig,
+  zustandCounterConfig,
 } from '../config/state-management';
 
 export class ConfigManager {
@@ -52,6 +56,10 @@ export class ConfigManager {
 
       if (this.config.options.withRecoil) {
         await this.addRecoilConfig();
+      }
+
+      if (this.config.options.withZustand) {
+        await this.addZustandConfig();
       }
     } catch (error) {
       throw new TemplateError('설정 추가 중 오류가 발생했습니다.', error as Error);
@@ -155,6 +163,31 @@ export class ConfigManager {
       dependencies: {
         ...pkg.dependencies,
         ...recoilDependencies,
+      },
+    }));
+  }
+
+  /**
+   * Zustand 설정을 추가
+   */
+  private async addZustandConfig(): Promise<void> {
+    logger.progress('Zustand 설정을 추가합니다...');
+
+    const { projectPath } = this.config;
+
+    // Store 설정 파일 생성
+    await writeConfigFile(projectPath, zustandConfig.path, zustandConfig.content);
+
+    // App.tsx와 Counter.tsx를 Zustand 버전으로 교체
+    // (Zustand는 main.tsx에 Provider 설정이 필요 없으므로 App.tsx만 교체하면 됩니다)
+    await writeConfigFile(projectPath, zustandAppConfig.path, zustandAppConfig.content);
+    await writeConfigFile(projectPath, zustandCounterConfig.path, zustandCounterConfig.content);
+
+    await updatePackageJson(projectPath, pkg => ({
+      ...pkg,
+      dependencies: {
+        ...pkg.dependencies,
+        ...zustandDependencies,
       },
     }));
   }

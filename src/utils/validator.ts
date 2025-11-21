@@ -35,9 +35,11 @@ export class ProjectValidator {
    * @param options 검증할 프로젝트 옵션
    */
   static validateOptions(options: ProjectOptions): void {
-    if (options.withRedux && options.withRecoil) {
-      logger.warning('Redux와 Recoil을 동시에 사용하는 것은 권장하지 않습니다.');
-      logger.info('하나의 상태관리 라이브러리만 선택하는 것을 권장합니다.');
+    const stateLibs = [options.withRedux, options.withRecoil, options.withZustand].filter(Boolean);
+    
+    if (stateLibs.length > 1) {
+      logger.warning('두 개 이상의 상태 관리 라이브러리가 선택되었습니다 (Redux, Recoil, Zustand).');
+      logger.info('하나의 라이브러리만 선택하는 것을 권장합니다.');
     }
   }
 

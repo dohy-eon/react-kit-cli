@@ -3,6 +3,7 @@ export interface ProjectOptions {
   withVitest?: boolean;
   withRedux?: boolean;
   withRecoil?: boolean;
+  withZustand?: boolean;
 }
 
 export interface PackageJson {

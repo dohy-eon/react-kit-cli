@@ -12,3 +12,9 @@ export {
   recoilAppConfig,
   recoilCounterConfig,
 } from './state-management.recoil';
+export {
+  zustandDependencies,
+  zustandConfig,
+  zustandAppConfig,
+  zustandCounterConfig,
+} from './state-management.zustand';
