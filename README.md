@@ -12,7 +12,7 @@ React Kit CLI는 클래스 기반의 모듈화된 아키텍처를 사용하여 �
 
 - **`ProjectValidator`**: 프로젝트 이름과 옵션 검증
 - **`ProjectGenerator`**: 프로젝트 생성 프로세스 관리
-- **`ConfigManager`**: 다양한 설정(Tailwind, Vitest, Redux, Recoil) 추가
+- **`ConfigManager`**: 다양한 설정(Tailwind, Vitest, Redux, Recoil, Zustand) 추가
 - **`Commands`**: CLI 명령어 처리
 
 ### 디렉토리 구조
@@ -20,9 +20,9 @@ React Kit CLI는 클래스 기반의 모듈화된 아키텍처를 사용하여 �
 ```
 src/
 ├── cli/           # CLI 관련 클래스들
-├── config/        # 설정 파일들 (Tailwind, Vitest, Redux, Recoil)
+├── config/        # 설정 파일들 (Tailwind, Vitest, Redux, Recoil, Zustand)
 ├── types/         # TypeScript 타입 정의
-└── utils/         # 유틸리티 클래스들과 함수들
+└── utils/        # 유틸리티 클래스들과 함수들
 ```
 
 ### 에러 처리
@@ -68,6 +68,7 @@ React 프로젝트를 시작할 때마다 반복되는 설정 작업들:
 
   - `--with-redux` 옵션으로 Redux 설정 추가
   - `--with-recoil` 옵션으로 Recoil 설정 추가
+  - `--with-zustand` 옵션으로 Zustand 설정 추가
   - 기본 상태관리 템플릿 제공
   - TypeScript 타입 지원
 
@@ -136,10 +137,22 @@ Recoil 포함:
 react-kit create my-project --with-recoil
 ```
 
+Zustand 포함:
+
+```bash
+react-kit create my-project --with-zustand
+```
+
 모든 기능 포함:
 
 ```bash
 react-kit create my-project --with-tailwind --with-vitest --with-redux
+```
+
+여러 상태관리 라이브러리 동시 선택 (권장하지 않음):
+
+```bash
+react-kit create my-project --with-redux --with-recoil --with-zustand
 ```
 
 ### 프로젝트 이름 규칙
@@ -309,6 +322,12 @@ react-kit-cli/
 
 - [공식 문서](https://recoiljs.org/)
 - 상태관리 설정 및 템플릿 생성에 사용했습니다.
+
+### Zustand
+
+- [공식 문서](https://zustand-demo.pmnd.rs/)
+- [GitHub 저장소](https://github.com/pmndrs/zustand)
+- 상태관리 설정 및 템플릿 생성에 사용했습니다. Redux나 Recoil보다 보일러플레이트가 적고 사용이 간단합니다.
 
 ### TypeScript
 
