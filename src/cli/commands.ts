@@ -16,7 +16,7 @@ export class Commands {
    * CLI 명령어들을 설정합니다.
    */
   private setupCommands(): void {
-    this.program.name('react-kit').description('리액트 프로젝트 세팅 도구').version('1.2.0');
+    this.program.name('react-kit').description('리액트 프로젝트 세팅 도구').version('1.3.0');
 
     this.program
       .command('create')
